@@ -13,9 +13,9 @@ class Cotendo
   def flush(cname, expressions, options = {})
     expressions = [*expressions]
     request(:do_flush,
-      :cname => cname,
-      :flush_expression => expressions.join("\n"),
-      :flush_type => options[:flush_type] || 'hard'
+      'api:cname' => cname,
+      'api:flushExpression' => expressions.join("\n"),
+      'api:flushType' => options[:flush_type] || 'hard'
     )
   end
 
@@ -23,6 +23,7 @@ class Cotendo
     @client = begin
       client = Savon::Client.new do
         wsdl.document = WSDL
+        wsdl.endpoint = WSDL + '&ver=1.0'
       end
       client.wsdl.request.auth.basic @user, @password
       client
@@ -30,10 +31,9 @@ class Cotendo
   end
 
   def request(method, options)
-    response = client.request(api_namespaced(method)) do |r|
-      r.namespaces['xmlns:api'] = NAMESPACE
-      r.namespaces['xmlns:wsdl'] = WSDL+'&ver=1.0'
-      r.body = options
+    response = client.request(api_namespaced(method)) do |soap|
+      soap.namespaces['xmlns:api'] = NAMESPACE
+      soap.body = options
     end
     response.to_hash
   end
