@@ -6,7 +6,11 @@ Install
 
 Usage
 =====
-    CODE_EXAMPLE
+    client = Cotendo.new(:user => 'user', :password => 'password')
+
+    # flush
+    client.flush(cname, "/images/*") # hard flush
+    client.flush(cname, ["/images/*", "/*.jsp", "/*.txt"], :flush_type => 'soft')
 
 Author
 ======
