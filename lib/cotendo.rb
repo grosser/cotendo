@@ -6,8 +6,8 @@ class Cotendo
   NAMESPACE = 'http://api.cotendo.net/'
 
   def initialize(options)
-    @user = options[:user]
-    @password = options[:password]
+    @user = options[:user] or raise("missing :user")
+    @password = options[:password] or raise("missing :password")
   end
 
   def flush(cname, expressions, options = {})
@@ -20,7 +20,7 @@ class Cotendo
   end
 
   def client
-    @client = begin
+    @client ||= begin
       client = Savon::Client.new do
         wsdl.document = WSDL
         wsdl.endpoint = WSDL + '&ver=1.0'
