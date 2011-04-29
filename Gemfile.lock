@@ -1,12 +1,19 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    builder (3.0.0)
+    crack (0.1.8)
     diff-lcs (1.1.2)
     git (1.2.5)
+    gyoku (0.1.1)
+      builder (>= 2.1.2)
+    httpi (0.7.7)
+      rack
     jeweler (1.5.2)
       bundler (~> 1.0.0)
       git (>= 1.2.5)
       rake
+    rack (1.2.1)
     rake (0.8.7)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
@@ -16,6 +23,11 @@ GEM
     rspec-expectations (2.5.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.5.0)
+    savon (0.8.2)
+      builder (>= 2.1.2)
+      crack (~> 0.1.8)
+      gyoku (>= 0.1.1)
+      httpi (>= 0.7.5)
 
 PLATFORMS
   ruby
@@ -24,3 +36,4 @@ DEPENDENCIES
   jeweler
   rake
   rspec (~> 2)
+  savon (>= 0.8.2)
