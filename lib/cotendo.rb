@@ -21,12 +21,11 @@ class Cotendo
 
   def client
     @client ||= begin
-      client = Savon::Client.new do
+      Savon::Client.new do |wsdl, http, wsse|
         wsdl.document = WSDL
         wsdl.endpoint = WSDL + '&ver=1.0'
+        http.auth.basic @user, @password
       end
-      client.wsdl.request.auth.basic @user, @password
-      client
     end
   end
 

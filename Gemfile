@@ -1,5 +1,5 @@
 source :rubygems
-gem 'savon', '>=0.8.2'
+gem 'savon', '~>0.9.6'
 
 group :dev do # not development <-> would add unneeded development dependencies in gemspec
   gem 'rake'
