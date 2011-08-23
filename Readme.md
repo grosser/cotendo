@@ -18,6 +18,9 @@ TODO
 
 Author
 ======
+### [Contributors](http://github.com/grosser/cotendo/contributors)
+ - [Nicolas Fouché](http://about.me/nfo)
+
 [Michael Grosser](http://grosser.it)<br/>
 michael@grosser.it<br/>
 Hereby placed under public domain, do what you want, just do not hold me accountable...
