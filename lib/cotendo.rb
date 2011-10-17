@@ -20,7 +20,8 @@ class Cotendo
     )
   end
   
-  def dns_get_conf(domain_name, environment = :production)
+  def dns_get_conf(domain_name, options = {})
+    environment = options[:environment] || :production
     environment = ENVIRONMENTS[environment] if ENVIRONMENTS[environment]    
     request('dns_get_conf',
       'api:domainName' => domain_name,
