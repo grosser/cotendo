@@ -4,6 +4,7 @@ class Cotendo
   VERSION = File.read( File.join(File.dirname(__FILE__),'..','VERSION') ).strip
   WSDL = "https://api.cotendo.net/cws?wsdl"
   NAMESPACE = 'http://api.cotendo.net/'
+  ENVIRONMENTS = { :staging => 0, :production => 1 }
 
   def initialize(options)
     @user = options[:user] or raise("missing :user")
@@ -16,6 +17,14 @@ class Cotendo
       'api:cname' => cname,
       'api:flushExpression' => expressions.join("\n"),
       'api:flushType' => options[:flush_type] || 'hard'
+    )
+  end
+  
+  def dns_get_conf(domain_name, environment = :production)
+    environment = ENVIRONMENTS[environment] if ENVIRONMENTS[environment]    
+    request('dns_get_conf',
+      'api:domainName' => domain_name,
+      'api:environment' => environment
     )
   end
 
@@ -38,6 +47,10 @@ class Cotendo
   end
 
   def api_namespaced(method)
-    "api:#{method.to_s.gsub(/_./){|x| x.slice(1,1).upcase }}"
+    if method.is_a? Symbol
+      "api:#{method.to_s.gsub(/_./){|x| x.slice(1,1).upcase }}"
+    else
+      "api:#{method}"
+    end
   end
 end
